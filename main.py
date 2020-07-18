@@ -24,7 +24,7 @@ def page_not_found(e):
 
 
 @api.errorhandler(503)
-def page_not_found(e):
+def application_error(e):
     # note that we set the 404 status explicitly
     error = "{'Response':'Application Error'}"
     return json.dumps(error), 503, {'Content-Type': 'application/json'}
@@ -63,7 +63,7 @@ def get_contents():
     else:
         rand = get_random_string()
         filename = 'resume_'+rand
-        outfile = "./Assets/Resume/Saved_Resumes"+filename+'.pdf'
+        outfile = "./Assets/Resume/Saved_Resumes/"+filename+'.pdf'
         # f = open(filename, 'wb')
         # f.write(content)
         # f.close()
