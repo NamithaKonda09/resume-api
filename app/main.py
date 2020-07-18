@@ -11,9 +11,9 @@ import binascii
 
 api = Flask(__name__)
 # Debugging
-api.config['ENV'] = 'development'
-api.config['DEBUG'] = True
-api.config['TESTING'] = True
+#api.config['ENV'] = 'development'
+#api.config['DEBUG'] = True
+#api.config['TESTING'] = True
 
 
 @api.errorhandler(404)
