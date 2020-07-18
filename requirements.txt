@@ -13,7 +13,6 @@ nltk==3.5
 numpy==1.19.0
 pandas==1.0.5
 pdfminer.six==20181108
-pdfminer
 Pillow==7.2.0
 python-dateutil==2.8.1
 python-gettext==4.0
