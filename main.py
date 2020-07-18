@@ -37,6 +37,16 @@ def internal_server_error(e):
     return json.dumps(error), 500, {'Content-Type': 'application/json'}
 
 
+@api.route('/', methods=['GET'])
+def home():
+    return "<h1>bitgrit Resume Parsing API</h1>"
+
+
+@api.route('/api', methods=['GET'])
+def method_not_allowed():
+    return json.dumps({'response': "Method not allowed"}), 405, {'Content-Type': 'application/json'}
+
+
 @api.route('/api', methods=['POST'])
 def get_contents():
     parser = reqparse.RequestParser()
