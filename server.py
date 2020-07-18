@@ -8,7 +8,26 @@ from flask import Flask, json, request
 from flask_restful import reqparse
 from nltk import word_tokenize
 import binascii
+
 api = Flask(__name__)
+# Debugging
+api.config['ENV'] = 'development'
+api.config['DEBUG'] = True
+api.config['TESTING'] = True
+
+
+@api.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    error = "{'Response':'Not a Valid Endpoint '}"
+    return json.dumps(error), 404, {'Content-Type': 'application/json'}
+
+
+@api.errorhandler(500)
+def internal_server_error(e):
+    # note that we set the 500 status explicitly
+    error = "{'Response':'Internal Server error '}"
+    return json.dumps(error), 500, {'Content-Type': 'application/json'}
 
 
 @api.route('/api', methods=['POST'])
@@ -17,6 +36,7 @@ def get_contents():
     parser.add_argument('enc', type=str, location='form')
     args = parser.parse_args()
     content = args['enc']
+    # content = args['jobtype']
     # content = request.args.get('enc')
     # print(content)
     # return content
@@ -36,7 +56,7 @@ def get_contents():
     else:
         rand = get_random_string()
         filename = 'resume_'+rand
-        outfile = filename+'.pdf'
+        outfile = "./Assets/Resume/Saved_Resumes"+filename+'.pdf'
         # f = open(filename, 'wb')
         # f.write(content)
         # f.close()
@@ -44,7 +64,7 @@ def get_contents():
             resume.write(content)
         resume.close()
         resume_text = ResumeParser(outfile).get_extracted_data()
-        jd = ('Devops JD.pdf')
+        jd = ('./Assets/Resume/Devops JD.pdf')
         jd_text = ResumeParser(jd).get_extracted_data()
         score = findsimilarity(
             listtostr(resume_text['skills']), listtostr(jd_text['skills']))
