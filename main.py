@@ -53,6 +53,9 @@ def get_contents():
     parser.add_argument('enc', type=str, location='form')
     args = parser.parse_args()
     content = args['enc']
+    if content == None:
+        return json.dumps({'response': "Empty parameter value"}), 403, {'Content-Type': 'application/json'}
+
     # content = args['jobtype']
     # content = request.args.get('enc')
     # print(content)
