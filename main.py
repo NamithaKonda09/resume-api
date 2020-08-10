@@ -8,6 +8,10 @@ from flask import Flask, json, request
 from flask_restful import reqparse
 from nltk import word_tokenize
 import binascii
+from flask_cors import CORS, cross_origin
+
+app=Flask(__name__)
+CORS(app)
 
 api = Flask(__name__)
 # Debugging
